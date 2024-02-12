@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken");
 const SECRET_KEY = "SECRET_KEY";
 
 const signup = async (req, res) => {
-  const { username, email, password } = req.body;
+  console.log('=========',req.body)
+  const { userName, email, password } = req.body;
   try {
     const existingUser = await userModel.findOne({ email: email });
     if (existingUser) {
@@ -14,7 +15,7 @@ const signup = async (req, res) => {
     const result = await userModel.create({
       email: email,
       password: hashedPassword,
-      userName: username,
+      userName: userName,
     });
     const token = jwt.sign({ email: result.email, id: result._id }, SECRET_KEY);
     res.status(201).json({ user: result, token: token });
@@ -24,9 +25,9 @@ const signup = async (req, res) => {
   }
 };
 const signin = async (req, res) => {
-  const { email, password } = req.body;
+  const { userName, password } = req.body;
   try {
-    const existingUser = await userModel.findOne({ email: email });
+    const existingUser = await userModel.findOne({ userName: userName });
     if (!existingUser) {
       return res.status(404).json({ message: "user not found" });
     }
