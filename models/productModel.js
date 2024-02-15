@@ -26,6 +26,7 @@ const productSchema = new Schema(
     isProductAvailable: {
       type: Boolean,
       required: true,
+      default:true
     },
     suplierName: {
       type: String,

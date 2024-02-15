@@ -6,7 +6,8 @@ const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 const cors = require("cors");
 const userRouter = require("./routes/userRoutes");
-const productRouter =require("./routes/productRoutes")
+const productRouter = require("./routes/productRoutes");
+const cartRouter = require("./routes/cartRoutes");
 
 app.use(
   cors({
@@ -27,17 +28,16 @@ mongoose.connect(
   }
 );
 
-app.use(express.json())
+app.use(express.json());
 const port = 5000;
 app.listen(port, () => {
   console.log(`server runing on port: ${port}`);
 });
 
-app.use((req,res,next)=>{
-console.log("HTTP Method : "+req.method+", URL : "+req.url);
-next();
-
-})
+app.use((req, res, next) => {
+  next();
+});
 
 app.use("/users", userRouter);
 app.use("/product", productRouter);
+app.use("/cart", cartRouter);
