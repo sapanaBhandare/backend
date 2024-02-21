@@ -29,7 +29,7 @@ mongoose.connect(
 );
 
 app.use(express.json());
-const port = 5000;
+const port = 7002;
 app.listen(port, () => {
   console.log(`server runing on port: ${port}`);
 });
@@ -38,6 +38,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/users", userRouter);
-app.use("/product", productRouter);
-app.use("/cart", cartRouter);
+app.use("/", userRouter);
+// app.use("/product", productRouter);
+// app.use("/cart", cartRouter);
